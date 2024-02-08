@@ -1,0 +1,43 @@
+@import url('App.css');
+
+.range {
+  -webkit-appearance: none;
+  appearance: none; 
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.range::-webkit-slider-runnable-track {
+  height: 12px;
+  background: var(--alternativeGrey);
+  border-radius: 16px;
+}
+
+.range::-moz-range-track {
+  height: 12px;
+  background: var(--alternativeGrey);
+  border-radius: 16px;
+}
+
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none; 
+  height: 12px;
+  width: 12px;
+  background-color: var(--alternativeGrey);
+  border-radius: 50%;
+  border: 2px solid var(--cardBg);
+  box-shadow: -407px 0 0 400px var(--cardBg);
+}
+
+.range::-moz-range-thumb {
+  height: 12px;
+  width: 12px;
+  background-color: var(--cardBg);
+  border-radius: 50%;
+  border: 1px solid var(--main);
+  box-shadow: -407px 0 0 400px var(--main);
+}
