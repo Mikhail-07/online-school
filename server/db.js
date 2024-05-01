@@ -1,11 +1,15 @@
 const {Sequelize} = require('sequelize');
-const {Pool} = require('pg')
 
-const pool = new Pool({
-  connectionString: "postgres://default:BPawHjy1FU3Z@ep-raspy-star-a2fszb1r-pooler.eu-central-1.aws.neon.tech:5432/verceldb?sslmode=require",
-})
+module.exports = new Sequelize(process.env.POSTGRES_URL, {
+  dialect: 'postgres',
+  pool: {
+    max: 10,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  }
+});
 
-module.exports = new Sequelize(
   // подключение базы
   // process.env.DB_NAME,
   // process.env.DB_USER,
@@ -15,7 +19,3 @@ module.exports = new Sequelize(
   //   host: process.env.DB_HOST,
   //   port: process.env.DB_PORT
   // }
-
-  // подключение базы vercel
-  pool
-)
