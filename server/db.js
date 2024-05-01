@@ -1,5 +1,5 @@
 const {Sequelize} = require('sequelize');
-const {Pool} = require()
+const {Pool} = require('pg')
 
 const pool = new Pool({
   connectionString: "postgres://default:BPawHjy1FU3Z@ep-raspy-star-a2fszb1r-pooler.eu-central-1.aws.neon.tech:5432/verceldb?sslmode=require",
