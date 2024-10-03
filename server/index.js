@@ -11,7 +11,11 @@ const errorHandler = require('./middleware/ErrorHandlingMiddleware.js')
 const PORT = process.env.PORT || 6000;
 
 const app = express();
-app.use(cors());
+app.use(cors(({
+  origin: 'https://online-school-nu.vercel.app',
+  methods: 'GET,POST,PUT,PATCH,DELETE',
+  allowedHeaders: 'Content-Type,Authorization',
+})));
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, 'static')));
 app.use(fileUpload({}));
