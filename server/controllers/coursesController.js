@@ -49,9 +49,9 @@ class CourseController{
         const {img} = req.files
         const existingCourse = await Course.findOne({where: {id}})
         const existingCourseImageName = existingCourse.img
-        
-        if (existingCourseImageName) {
-          await unlink(path.resolve(__dirname, '..', 'static', existingCourseImageName));
+        const filePath = path.resolve(__dirname, '..', 'static', existingCourseImageName);
+        if (fs.existsSync(filePath)){
+          await unlink(path.resolve(filePath));
         }
 
         const fileName = uuid.v4() + '.jpg';
