@@ -68,6 +68,25 @@ app.get('/audio/:filename', (req, res) => {
   }
 });
 
+app.get('/list-app-files', (req, res) => {
+  const appDirectoryPath = path.resolve('/app');
+
+  fs.readdir(appDirectoryPath, { withFileTypes: true }, (err, files) => {
+    if (err) {
+      return res.status(500).json({ message: 'Unable to scan directory', error: err });
+    }
+
+    const fileList = files.map(file => {
+      return {
+        name: file.name,
+        isDirectory: file.isDirectory()
+      };
+    });
+
+    res.json(fileList);
+  });
+});
+
 const start = async () => {
   try {
     sequelize.authenticate()
