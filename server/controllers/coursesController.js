@@ -72,9 +72,10 @@ class CourseController{
 
         let fileName = ''
         if (req.files && req.files[`lesson_${number}`]){ //проверка на наличие файла в запросе
-          if (existingLesson){
+          const filePath = path.resolve(__dirname, '..', 'static', existingLesson.audio);
+          if (fs.existsSync(filePath)){
             console.log('Удален аудиоматериал у ' + number + ' урока')
-            await unlink(path.resolve(__dirname, '..', 'static', existingLesson.audio));
+            await unlink(filePath);
           }
           const audio = req.files[`lesson_${number}`]
           fileName = uuid.v4() + '.mp3';
