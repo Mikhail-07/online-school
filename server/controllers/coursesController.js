@@ -55,6 +55,7 @@ class CourseController{
         }
 
         const fileName = uuid.v4() + '.jpg';
+        console.log('Картинка' + fileName + ' сохранена')
         img.mv(path.resolve(__dirname, '..', 'static', fileName));
         await Course.update({img: fileName}, {where: {id}})  
       }
