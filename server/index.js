@@ -87,6 +87,25 @@ app.get('/list-app-files', (req, res) => {
   });
 });
 
+app.get('/list-static-files', (req, res) => {
+  const staticDirectoryPath = path.resolve(__dirname, 'static'); // Путь к директории static
+
+  fs.readdir(staticDirectoryPath, { withFileTypes: true }, (err, files) => {
+    if (err) {
+      return res.status(500).json({ message: 'Unable to scan directory', error: err });
+    }
+
+    const fileList = files.map(file => {
+      return {
+        name: file.name,
+        isDirectory: file.isDirectory()
+      };
+    });
+
+    res.json(fileList); // Возвращаем список файлов и папок в JSON-формате
+  });
+});
+
 const start = async () => {
   try {
     sequelize.authenticate()
