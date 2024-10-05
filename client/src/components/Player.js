@@ -1,23 +1,21 @@
-import React, { useEffect, useState } from 'react'
-import { Card } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react';
+import { Card } from 'react-bootstrap';
 import { IconContext } from "react-icons";
-import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai"
+import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai";
 import useSound from "use-sound";
 
-const Player = ( {audio} ) => {
+const Player = ({ audio }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [time, setTime] = useState({
     min: "00",
-    sec: "00"
-  }); // текущее положение звука в минутах и секундах
-
+    sec: "00",
+  }); // текущая позиция звука в минутах и секундах
   const [currTime, setCurrTime] = useState({
     min: "",
-    sec: ""
+    sec: "",
   });
-
   const [seconds, setSeconds] = useState(); // текущая позиция звука в секундах
-  const [play, { pause, duration, sound }] = useSound(audio);
+  const [play, { pause, duration, sound }] = useSound(audio, { id: 'my-sound' });
 
   useEffect(() => {
     if (duration) {
@@ -26,21 +24,22 @@ const Player = ( {audio} ) => {
       const secRemain = Math.floor(sec % 60);
       setTime({
         min: min,
-        sec: secRemain
+        sec: secRemain,
       });
     }
-  }, [isPlaying, duration]);
+  }, [duration]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (sound) {
-        setSeconds(sound.seek([])); // устанавливаем состояние с текущим значением в секундах
-        const min = ("0" + Math.floor(sound.seek([]) / 60)).slice(-2);
-        const sec = ("0" + Math.floor(sound.seek([]) % 60)).slice(-2);
+        const sec = sound.seek([]);
+        const min = ("0" + Math.floor(sec / 60)).slice(-2);
+        const secRemain = ("0" + Math.floor(sec % 60)).slice(-2);
         setCurrTime({
           min,
-          sec,
+          sec: secRemain,
         });
+        setSeconds(sec);
       }
     }, 1000);
     return () => clearInterval(interval);
@@ -48,16 +47,16 @@ const Player = ( {audio} ) => {
 
   const playingButton = () => {
     if (isPlaying) {
-      pause(); // приостанавливаем воспроизведение звука
+      pause();
       setIsPlaying(false);
     } else {
-      play(); // воспроизводим аудиозапись
+      play();
       setIsPlaying(true);
     }
   };
 
   return (
-    <Card className='w-100'>
+    <Card className="w-100">
       <Card.Body>
         <input
           type="range"
@@ -65,36 +64,24 @@ const Player = ( {audio} ) => {
           max={duration / 1000}
           value={seconds}
           className="w-100 range"
-          onChange={(e) => {
-            sound.seek([e.target.value]);
-          }}
+          onChange={(e) => sound.seek([e.target.value])}
         />
-          <div className='d-flex justify-content-between'>
-            <div>
-              {currTime.min}:{currTime.sec}
-            </div>
-            
-            {!isPlaying ? (
+        <div className="d-flex justify-content-between">
+          <div>
+            {currTime.min}:{currTime.sec}
+          </div>
           <button className="playButton" onClick={playingButton}>
             <IconContext.Provider value={{ size: "3em", color: "#755986" }}>
-              <AiFillPlayCircle />
+              {isPlaying ? <AiFillPauseCircle /> : <AiFillPlayCircle />}
             </IconContext.Provider>
           </button>
-        ) : (
-          <button className="playButton" onClick={playingButton}>
-            <IconContext.Provider value={{ size: "3em", color: "#755986" }}>
-              <AiFillPauseCircle />
-            </IconContext.Provider>
-          </button>
-        )}
-            <div>
-              {time.min}:{time.sec}
-            </div>
+          <div>
+            {time.min}:{time.sec}
+          </div>
         </div>
-        
       </Card.Body>
     </Card>
-  )
-}
+  );
+};
 
-export default Player
+export default Player;
