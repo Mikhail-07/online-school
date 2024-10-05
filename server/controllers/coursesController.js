@@ -50,7 +50,9 @@ class CourseController{
         const existingCourse = await Course.findOne({where: {id}})
         const existingCourseImageName = existingCourse.img
         
-        await unlink(path.resolve(__dirname, '..', 'static', existingCourseImageName));
+        if (existingCourseImageName) {
+          await unlink(path.resolve(__dirname, '..', 'static', existingCourseImageName));
+        }
 
         const fileName = uuid.v4() + '.jpg';
         img.mv(path.resolve(__dirname, '..', 'static', fileName));
