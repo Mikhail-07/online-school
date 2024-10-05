@@ -32,6 +32,7 @@ app.get('/', (req, res) => {
 
 app.get('/audio/:filename', (req, res) => {
   const filePath = path.join(staticDir, req.params.filename);
+  console.log('Current working directory:', process.cwd());
   console.log(filePath)
   if (fs.existsSync(filePath)) {
     const stat = fs.statSync(filePath);
