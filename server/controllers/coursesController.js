@@ -1,5 +1,6 @@
 const uuid = require('uuid')
 const path = require('path')
+const fs = require('fs');
 const { unlink } = require('node:fs/promises');
 const {Course, Lesson, User, OrderCourse} = require('../models/models')
 const ApiError = require('../error/ApiError');
