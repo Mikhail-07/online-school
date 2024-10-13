@@ -67,8 +67,12 @@ nav{
 }
 
 
-.full-height{
-  height: 90vh;
+.full-height {
+  height: calc(100vh - var(--navbar-height));
+}
+
+.page-content {
+  margin-top: var(--navbar-height);
 }
 
 .btn-outline-warning{
@@ -159,7 +163,11 @@ nav{
 
 .heading-font{
   font-family: 'PT Sans Narrow', sans-serif;
-  line-height: 1;
+  line-height: 0.8;
+}
+
+.heading-color.heading-font {
+  cursor: pointer;
 }
 
 .row:hover .heading-font{
@@ -548,8 +556,5 @@ span{
     font-size: 9em;
   }
 
-  .f-700{
-    font-size: 15em;
-    
-  }
+
 }
