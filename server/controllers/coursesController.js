@@ -66,6 +66,7 @@ class CourseController{
       })   
 
       const middle = Math.ceil(lessons.length/2)
+      console.log('Уроки lessons: ', lessons)
       lessons.splice(0, middle)
       for (const lesson of JSON.parse(lessons)){
         console.log(lesson)
