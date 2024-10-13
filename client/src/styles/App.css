@@ -163,7 +163,7 @@ nav{
 
 .heading-font{
   font-family: 'PT Sans Narrow', sans-serif;
-  line-height: 0.8;
+  line-height: 1;
 }
 
 .heading-color.heading-font {
@@ -536,7 +536,7 @@ span{
   }
 
   .f-700{
-    font-size: 14em;
+    font-size: 13em;
     
   }
 
