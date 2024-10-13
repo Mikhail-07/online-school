@@ -1,8 +1,8 @@
 import React from 'react'
 import cash from '../assets/image/hero.webp'
-import { Col, Container, Nav, NavLink, Row } from 'react-bootstrap'
+import { Col, Container, Nav, Row } from 'react-bootstrap'
 import { FaArrowRight } from "react-icons/fa";
-import { ACHIEVEMENT_ROUTE, PROFILE_ROUTE } from '../utils/consts';
+import { ACHIEVEMENT_ROUTE } from '../utils/consts';
 import Footer from '../components/Footer'
 import { useNavigate } from 'react-router-dom';
 import PhraseDivider from '../utils/PhraseDivider';
@@ -25,7 +25,7 @@ const Сoaching = () => {
               </div>
             </h1>
             <div className='hero__image-card'>
-              <img className='object-fit-cover h-100 w-100' src={cash}/>
+              <img className='object-fit-cover h-100 w-100' alt='hero.img' src={cash}/>
             <div className='hero__img-gradient' />
           </div>
         </div>

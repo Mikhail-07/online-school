@@ -1,6 +1,5 @@
 import React from 'react'
-import CoursePaymentAdded from './CoursePaymentAdded'
-import CoursePaymentAvailable from './CoursePaymentAvailable'
+import { CoursePaymentAdded, CoursePaymentAvailable } from './index'
 import { Card, Col } from 'react-bootstrap'
 
 const CoursePayment = ({price, action, auth, added}) => {

@@ -1,8 +1,6 @@
-import { cloneElement, useContext, useState } from 'react';
+import { cloneElement, useState } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import AchieveCarousel from './AchieveCarousel';
-import AchieveDescription from './AchieveDescription';
-import { Context } from '../index';
+import {AchieveCarousel, AchieveDescription} from './index'
 import { observer } from 'mobx-react-lite';
 import { Col } from 'react-bootstrap';
 

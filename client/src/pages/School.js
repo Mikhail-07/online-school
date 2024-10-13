@@ -45,7 +45,7 @@ const School = () => {
                   <div>А</div>
                 </div>
             </div>
-            <img className='hero__image-home object-fit-contain object-position__right' src={cash}/>
+            <img className='hero__image-home object-fit-contain object-position__right' alt='hero img' src={cash}/>
           </div>
           <div className='hero__img-gradient' />
         </div>

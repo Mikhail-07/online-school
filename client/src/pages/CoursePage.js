@@ -1,13 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Button, Card, Col, Row, Image, Container } from 'react-bootstrap';
+import { Card, Container } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom'
-import CurriculumAccordion from '../components/CurriculumAccordion';
+import { CurriculumAccordion, CurriculumForOneLesson, CoursePayment, Footer} from '../components'
 import { fetchCourse, registrationOnCourse } from '../http/coursesAPI'
 import { Context } from '../index';
-import Footer from '../components/Footer';
-import ButtonSection from '../components/ButtonSection';
-import CoursePayment from '../components/CoursePayment';
-import CurriculumForOneLesson from '../components/CurriculumForOneLesson';
 import { PROFILE_ROUTE } from '../utils/consts';
 import { fetchUserCourses } from '../http/userAPI';
 import { observer } from 'mobx-react-lite';
@@ -23,7 +19,7 @@ const CoursePage = observer(() => {
     fetchCourse(id)
       .then(data => setCourse(data))
     if (user.isAuth) fetchUserCourses(email).then(data => {user.setCourses(data)})
-}, [id, email])
+}, [id, email, user])
 
   const signUpForCourse = async () => {
     registrationOnCourse({email, courseId: id}).then(() => navigate(PROFILE_ROUTE))

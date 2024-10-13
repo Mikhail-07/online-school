@@ -1,20 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Container, Button, Spinner } from 'react-bootstrap';
-import ModalWindow from '../components/admin/ModalWindow';
-import SortableTable from '../components/admin/SortableTable';
+import React, { useContext, useEffect, useState } from 'react';
+import { Container, Button } from 'react-bootstrap';
 import { Context } from '../index';
-import usersHeaderConfig from '../components/admin/usersHeaderConfig'
-import groupHeaderConfig from '../components/admin/groupHeaderConfig'
-import courseHeaderConfig from '../components/admin/courseHeaderConfig'
 import { fetchUsers, fetchGroups } from '../http/adminAPI';
 import { fetchCourses } from '../http/coursesAPI';
 import { observer } from 'mobx-react-lite';
-import GroupForm from '../components/admin/GroupForm';
-import GroupEdit from '../components/admin/GroupEdit';
-import CourseEdit from '../components/admin/CourseEdit';
-import CourseForm from '../components/CourseForm';
-import AchieveForm from '../components/admin/AchieveForm';
-import SpinnerLoading from '../components/SpinnerLoading';
+import { ModalWindow, SortableTable, GroupForm, GroupEdit, CourseEdit, AchieveForm, CourseForm, courseHeaderConfig, usersHeaderConfig, groupHeaderConfig } from '../components/admin';
+import { SpinnerLoading } from '../components'
 
 const Admin = observer (() => {
   const [loading, setLoading] = useState(true)
@@ -54,10 +45,11 @@ const Admin = observer (() => {
 
         <ModalWindow>
           <Button variant="warning">
-            Мои заслуги
+            Добавить заслуги
           </Button>
           <AchieveForm />
         </ModalWindow>
+
       </div>
       <div className='d-flex flex-wrap gap-3'>
         <SortableTable name={'Курсы'} arr={course.courses} headerConfig={courseHeaderConfig}>

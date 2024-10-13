@@ -1,7 +1,6 @@
 import React, { useRef } from 'react'
 import Slider from "react-slick";
 import Slideritem from './Slideritem';
-import { Col } from 'react-bootstrap';
 import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 
 const AchieveCarousel = ({files, canva=false}) => {

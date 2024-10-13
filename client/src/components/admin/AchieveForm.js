@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import { Button, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import ModalFooter from './ModalFooter';
 import { SlTrash } from 'react-icons/sl';
 import { createAchive } from '../../http/adminAPI';
@@ -143,7 +143,7 @@ const AchieveForm = ({handleClose}) => {
                   media.length>0
                   ? 
                   <div className='pb-2 px-2'>
-                    <SlTrash data-id={0} onClick={e => setMedia(media.filter(file => file.name!=e.target.dataset.id))} />
+                    <SlTrash data-id={0} onClick={e => setMedia(media.filter(file => file.name !== e.target.dataset.id))} />
                   </div>
                   : '' 
                 }
@@ -160,7 +160,7 @@ const AchieveForm = ({handleClose}) => {
                   media.length>idx+1
                   ? 
                   <div className='pb-2 px-2'>
-                    <SlTrash data-id={file.name} onClick={e => setMedia(media.filter(file => file.name!=e.target.dataset.id))} />
+                    <SlTrash data-id={file.name} onClick={e => setMedia(media.filter(file => file.name !== e.target.dataset.id))} />
                   </div>
                   : '' 
                 }

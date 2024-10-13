@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import Container from 'react-bootstrap/esm/Container'
 import Card from 'react-bootstrap/Card'
 import { Button, Form } from 'react-bootstrap';
-import { BrowserRouter, NavLink, Route, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { LOGIN_ROUTE, REGISTRATION_ROUTE, SCHOOL_ROUTE } from '../utils/consts';
 import { login, registration } from '../http/userAPI';
 import { Context } from '../index';

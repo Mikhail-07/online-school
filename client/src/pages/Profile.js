@@ -1,12 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { Context } from '../index';
-import CoursesDropdown from '../components/CoursesDropdown';
-import NoCoursesCard from '../components/NoCoursesCard';
-import LessonCard from '../components/LessonCard'
+import { CoursesDropdown, NoCoursesCard, LessonCard, SpinnerLoading } from '../components'
 import { fetchUserCourses, fetchUserLessons } from '../http/userAPI';
 import { observer } from 'mobx-react-lite';
-import SpinnerLoading from '../components/SpinnerLoading';
 
 
 const Profile = observer(() => {
@@ -29,7 +26,7 @@ const Profile = observer(() => {
         setCourse(data[0])
       })
       .finally(() => setLoading(false))
-}, [email])
+}, [email, user])
 
   useEffect(() => {
     if (!course || !course.id) return
@@ -38,7 +35,7 @@ const Profile = observer(() => {
       user.setLessons(data)
     })
     .finally(() => setLoading(false))
-  }, [email, course])
+  }, [email, course, user])
 
   if (loading) {
     return <SpinnerLoading />

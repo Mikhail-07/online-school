@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react'
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import AccordionLessons from './admin/AccordionLessons';
+import AccordionLessons from './AccordionLessons';
 import { Modal } from 'react-bootstrap';
-import ModalFooter from './admin/ModalFooter';
-import { createCourse, fetchCourses } from '../http/coursesAPI';
-import { Context } from '../index';
+import ModalFooter from './ModalFooter';
+import { createCourse, fetchCourses } from '../../http/coursesAPI';
+import { Context } from '../../index';
 
 let newId = 0
 

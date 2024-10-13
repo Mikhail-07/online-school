@@ -7,9 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { COURSES_ROUTE } from '../utils/consts';
 import { observer } from 'mobx-react-lite';
 import { fetchCourses } from '../http/coursesAPI';
-import Footer from '../components/Footer';
-import { Spinner } from 'react-bootstrap';
-import SpinnerLoading from '../components/SpinnerLoading';
+import { SpinnerLoading, Footer } from '../components'
 
 const CoursesPage = observer(() => {
   const [loading, setLoading] = useState(true)

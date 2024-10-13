@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import React, { useContext, useEffect, useState } from 'react'
 import { Context } from '../../index'
-import { Modal, Form, Card, Button } from 'react-bootstrap'
+import { Modal, Form, Card } from 'react-bootstrap'
 import { createGroup, fetchGroups, fetchUsers } from '../../http/adminAPI'
 import ModalFooter from './ModalFooter'
 import { assignGroup } from './assignGroup'

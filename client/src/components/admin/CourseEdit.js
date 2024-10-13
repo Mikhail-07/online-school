@@ -24,6 +24,7 @@ const CourseEdit = ({id, handleClose}) => {
 
   const [course, setCourse] = useState(courseStore.course)
   const [lessons, setLessons] = useState(courseStore.lessons)
+  
   useEffect(() => {
     fetchLessons(id).then(data => {
       courseStore.setLessons(data)
