@@ -50,7 +50,7 @@ function Auth () {
           ?
           <div>
             <Form.Control value={value.email} onChange={e => setValue({...value, email: e.target.value})} className='mt-2' placeholder="Введите email"></Form.Control>
-            <Form.Control value={value.password} onChange={e => setValue({...value, password: e.target.value})} className='mt-2' placeholder="Введите пароль"></Form.Control>
+            <Form.Control value={value.password} onChange={e => setValue({...value, password: e.target.value})} type="password" className='mt-2' placeholder="Введите пароль"></Form.Control>
           </div>
         
           :
