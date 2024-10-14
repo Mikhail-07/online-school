@@ -56,6 +56,7 @@ const CourseEdit = ({ id, handleClose }) => {
     editCourse(formData)
       .then(data => {
         console.log(data);
+        handleClose()
       })
       .catch(error => {
         console.error(error);
@@ -151,7 +152,7 @@ const CourseEdit = ({ id, handleClose }) => {
             </Form>
           </Modal.Body>
 
-          <ModalFooter close={handleClose} action={edit} />
+          <ModalFooter action={edit} />
         </>
       }
     </>
