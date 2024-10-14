@@ -5,6 +5,10 @@ export { default as CourseForm } from './CourseForm';
 export { default as GroupEdit } from './GroupEdit';
 export { default as CourseEdit } from './CourseEdit';
 export { default as AchieveForm } from './AchieveForm';
+export { default as AccordionLessons } from './AccordionLessons';
+export { default as ModalFooter } from './ModalFooter';
+
+
 
 export { default as courseHeaderConfig } from './config/courseHeaderConfig';
 export { default as groupHeaderConfig } from './config/groupHeaderConfig';
