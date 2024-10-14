@@ -5,7 +5,7 @@ const ModalFooter = ({close, action}) => {
 
   const submit = () => {
     action()
-    close()
+    if (close) close()
   }
 
   return (
