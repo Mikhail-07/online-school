@@ -11,7 +11,16 @@ const Slideritem = ({item, canva=false}) => {
       ?
       <img src={process.env.REACT_APP_API_URL + item.file } alt='img' className='h-100 w-100 object-fit-cover'/>
       :
-      <video className='w-100 h-100 object-fit-cover' muted autoPlay crossOrigin="anonymous" loop="loop">
+      <video 
+        className='w-100 h-100 object-fit-cover' 
+        muted 
+        playsInline 
+        controls={false}
+        autoPlay
+        controlsList="nodownload nofullscreen noremoteplayback"  
+        crossOrigin="anonymous" 
+        loop="loop"
+        >
         <source src={process.env.REACT_APP_API_URL + item.file } type="video/mp4" />
       </video>
     }
