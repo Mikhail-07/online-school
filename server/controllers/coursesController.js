@@ -42,90 +42,76 @@ class CourseController{
     } 
   }
 
-  async edit(req, res, next){
-    // try {
+  async edit(req, res, next) {
+    try {
       const {id, title, subTitle, description, price, lessons} = req.body;
-
-      if (req.files && req.files.img){
-        const {img} = req.files
-        const existingCourse = await Course.findOne({where: {id}})
-        const existingCourseImageName = existingCourse.img
+  
+      // Работа с изображением курса
+      if (req.files && req.files.img) {
+        const {img} = req.files;
+        const existingCourse = await Course.findOne({ where: { id } });
+        const existingCourseImageName = existingCourse.img;
+  
         const filePath = path.resolve(__dirname, '..', 'static', existingCourseImageName);
-        if (fs.existsSync(filePath)){
+        if (fs.existsSync(filePath)) {
           await unlink(path.resolve(filePath));
         }
-
+  
         const fileName = uuid.v4() + '.jpg';
-        console.log('Картинка' + fileName + ' сохранена')
         img.mv(path.resolve(__dirname, '..', 'static', fileName));
-        await Course.update({img: fileName}, {where: {id}})  
+        await Course.update({ img: fileName }, { where: { id } });
       }
-      
-      const course = await Course.update({title, subTitle, description, price}, {
-        where: {id}
-      })   
-
-      const middle = Math.ceil(lessons.length/2)
-      console.log('Уроки lessons: ', lessons)
-      lessons.splice(0, middle)
-      for (const lesson of JSON.parse(lessons)){
-        console.log(lesson)
-        const {number, title, description, content} = lesson
-        const existingLesson = await Lesson.findOne({ where: {number, courseId: id}})
-
-        let fileName = ''
-        if (req.files && req.files[`lesson_${number}`]){ //проверка на наличие файла в запросе
+  
+      // Обновление курса
+      const course = await Course.update({ title, subTitle, description, price }, { where: { id } });
+  
+      // Парсинг уроков
+      const parsedLessons = JSON.parse(lessons);
+      const middle = Math.ceil(parsedLessons.length / 2);
+      parsedLessons.splice(0, middle); // Применяем splice к массиву
+  
+      for (const lesson of parsedLessons) {
+        const { number, title, description, content } = lesson;
+        const existingLesson = await Lesson.findOne({ where: { number, courseId: id } });
+  
+        let fileName = '';
+        if (req.files && req.files[`lesson_${number}`]) {
           const filePath = path.resolve(__dirname, '..', 'static', existingLesson.audio);
-          if (fs.existsSync(filePath)){
-            console.log('Удален аудиоматериал у ' + number + ' урока')
+          if (fs.existsSync(filePath)) {
             await unlink(filePath);
           }
-          const audio = req.files[`lesson_${number}`]
+          const audio = req.files[`lesson_${number}`];
           fileName = uuid.v4() + '.mp3';
-          console.log('Аудиматериалу урока ' + number + ' присвоено новое имя: ' + fileName)
           audio.mv(path.resolve(__dirname, '..', 'static', fileName));
         } else {
-          fileName = existingLesson.audio
+          fileName = existingLesson.audio;
         }
-
-        if (existingLesson){
-          console.log('Обновил урок:' + number)
-
-          existingLesson.set({
-            number, 
-            title, 
-            description, 
-            content, 
-            audio: fileName
-          })
-          await existingLesson.save()
-
+  
+        if (existingLesson) {
+          existingLesson.set({ number, title, description, content, audio: fileName });
+          await existingLesson.save();
         } else {
-          console.log('Создал урок:' + number)
-          await Lesson.create({number, title, description, content, audio: fileName, courseId: id})
+          await Lesson.create({ number, title, description, content, audio: fileName, courseId: id });
+        }
+      }
+  
+      // Удаление ненужных уроков
+      let i = parsedLessons.length + 1;
+      const lessonDelete = async () => {
+        const beingDelete = await Lesson.findOne({ where: { courseId: id, number: i } });
+        if (beingDelete) {
+          await Lesson.destroy({ where: { courseId: id, number: i } });
+          i += 1;
+          lessonDelete();
         }
       };
-
-      let i = JSON.parse(lessons).length + 1
-        const lessonDelete = async () => {
-          console.log(i)
-          const beingDelete = await Lesson.findOne({where: {courseId: id, number: i}})
-          console.log(beingDelete)
-          if (beingDelete){
-            await Lesson.destroy({where: {courseId: id, number: i}});
-            i = i + 1;
-            lessonDelete()
-          } else {
-            return
-          }
-        }
-        lessonDelete()
-      
-      return res.json(course)
-    // } catch(e) {
-    //   next(new Error('Something broke again! '))
-    //   next(ApiError.badRequest(e.message))
-    // } 
+      lessonDelete();
+  
+      return res.json(course);
+    } catch (e) {
+      next(new Error('Something broke again! '))
+      next(ApiError.badRequest(e.message))
+    }
   }
 
   async getAll(req, res, next){

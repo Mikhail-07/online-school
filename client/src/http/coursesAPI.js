@@ -7,9 +7,6 @@ export const createCourse = async (course) => {
 } 
 
 export const editCourse = async (course) => {
-  const b = Object.fromEntries(course.entries())
-    console.log(b)
-
   const {data} = await $authHost.post('api/course/edit', course)
   return data
 } 
