@@ -20,7 +20,7 @@ const LessonAccordion = ({lessons}) => {
               ?
               <div>
                 <h6>Аудиоурок</h6>
-                <Player audio={process.env.REACT_APP_API_URL + 'audio/' + lesson.audio}/>
+                <Player audio={process.env.REACT_APP_API_URL + lesson.audio}/>
               </div>
               : ''
             }
