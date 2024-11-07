@@ -112,8 +112,8 @@ Media.belongsTo(Achieve)
 User.hasMany(Waitlist);      
 Waitlist.belongsTo(User);
 
-Course.hasMany(Waitlist);
-Waitlist.belongsTo(Course);  
+// Course.hasMany(Waitlist);
+// Waitlist.belongsTo(Course);  
 
 
 module.exports = {

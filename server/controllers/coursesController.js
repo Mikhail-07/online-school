@@ -195,7 +195,7 @@ class CourseController{
       const existingWaitlistEntry = await Waitlist.findOne({
           where: {
               userId: user.id,
-              courseId
+              // courseId
           }
       });
 
@@ -206,7 +206,7 @@ class CourseController{
       // Добавляем запись в Waitlist
       await Waitlist.create({
           userId: user.id,
-          courseId
+          // courseId
       });
 
       return {
