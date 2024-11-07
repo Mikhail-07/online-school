@@ -180,9 +180,7 @@ class CourseController{
       console.log('Проверка пользователя в базе данных');
       let user = await User.findOne({
           where: {
-              name: { [Op.iLike]: name },
-              surname: { [Op.iLike]: surname },
-              chatId
+            chatId
           }
       });
 
