@@ -177,7 +177,7 @@ class CourseController{
 
   async addToWaitlist({ chatId, name, surname, email, courseId }) {
     try {
-      // Проверяем, есть ли пользователь с такими данными
+      console.log('Проверка пользователя в базе данных');
       let user = await User.findOne({
           where: {
               name: { [Op.iLike]: name },
